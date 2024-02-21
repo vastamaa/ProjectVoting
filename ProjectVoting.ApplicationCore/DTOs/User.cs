@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectVoting.ApplicationCore.DTOs
 {
@@ -19,6 +20,13 @@ namespace ProjectVoting.ApplicationCore.DTOs
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string ConfirmPassword { get; set; }
 
+
+    }
+
+    public class User : IdentityUser
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
     }
 }
