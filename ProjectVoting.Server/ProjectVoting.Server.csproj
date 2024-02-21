@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectVoting.ApplicationCore\ProjectVoting.ApplicationCore.csproj" />
     <ProjectReference Include="..\projectvoting.client\projectvoting.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
