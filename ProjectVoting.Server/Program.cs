@@ -15,6 +15,7 @@ namespace ProjectVoting.Server
             builder.Services.AddApplicationCore();
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddCustomServices();
+            builder.Services.AddUserIdentity();
             builder.Services.AddScoped<ValidationFilterAttribute>();
             builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
