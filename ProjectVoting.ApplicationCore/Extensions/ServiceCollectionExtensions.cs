@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ProjectVoting.Infrastructure.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ProjectVoting.ApplicationCore.DTOs;
+using ProjectVoting.ApplicationCore.Interfaces;
+using ProjectVoting.ApplicationCore.Services;
+using ProjectVoting.Infrastructure.Persistence.Contexts;
+using System.Reflection;
 
 namespace ProjectVoting.ApplicationCore.Extensions
 {
@@ -35,6 +37,13 @@ namespace ProjectVoting.ApplicationCore.Extensions
                 options.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<Context>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAccountService, AccountService>();
 
             return services;
         }
