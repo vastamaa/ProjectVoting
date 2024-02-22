@@ -21,7 +21,7 @@ namespace ProjectVoting.Server.Controllers
         }
 
         // POST api/<AccountController>
-        [HttpPost]
+        [HttpPost(nameof(Register))]
         [ValidateAntiForgeryToken]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register(UserRegistration userModel)
@@ -36,7 +36,7 @@ namespace ProjectVoting.Server.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Login))]
         [ValidateAntiForgeryToken]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Login(UserLogin userModel)
@@ -46,7 +46,7 @@ namespace ProjectVoting.Server.Controllers
             return LoggedIn ? Ok() : BadRequest(userModel);
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Logout))]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
