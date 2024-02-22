@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectVoting.ApplicationCore.DTOs;
@@ -28,7 +29,7 @@ namespace ProjectVoting.ApplicationCore.Extensions
 
         public static IServiceCollection AddUserIdentity(this IServiceCollection services)
         {
-            services.AddIdentityCore<User>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 10;
                 options.Password.RequireDigit = true;
