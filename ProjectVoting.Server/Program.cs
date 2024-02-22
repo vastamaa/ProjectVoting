@@ -1,5 +1,7 @@
 
+using Microsoft.AspNetCore.Mvc;
 using ProjectVoting.ApplicationCore.Extensions;
+using ProjectVoting.Server.Filters;
 
 namespace ProjectVoting.Server
 {
@@ -12,6 +14,9 @@ namespace ProjectVoting.Server
             // Add services to the container.
             builder.Services.AddApplicationCore();
             builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddCustomServices();
+            builder.Services.AddScoped<ValidationFilterAttribute>();
+            builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
