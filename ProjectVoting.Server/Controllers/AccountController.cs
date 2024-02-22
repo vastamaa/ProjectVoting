@@ -1,7 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectVoting.ApplicationCore.DTOs;
+using ProjectVoting.ApplicationCore.Interfaces;
+using ProjectVoting.Server.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,70 +10,49 @@ namespace ProjectVoting.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    [AllowAnonymous]
+    public class AccountController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
+        private readonly IAccountService _accountService;
 
-        public AccountController(IMapper mapper, UserManager<User> userManager)
+        public AccountController(IAccountService accountService)
         {
-            _mapper = mapper;
-            _userManager = userManager;
-        }
-
-        // GET: api/<AccountController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AccountController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            _accountService = accountService;
         }
 
         // POST api/<AccountController>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register(UserRegistration userModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var user = _mapper.Map<User>(userModel);
-
-            var result = await _userManager.CreateAsync(user, userModel.Password);
+            var result = await _accountService.RegisterUser(userModel);
 
             if (!result.Succeeded)
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.TryAddModelError(error.Code, error.Description);
-                }
-
-                Console.Write("Unsuccessful!");
+                return BadRequest(userModel);
             }
-
-            await _userManager.AddToRoleAsync(user, "Visitor");
 
             return Ok();
         }
 
-        // PUT api/<AccountController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> Login(UserLogin userModel)
         {
+            var LoggedIn = await _accountService.LoginAsync(userModel);
+
+            return LoggedIn ? Ok() : BadRequest(userModel);
         }
 
-        // DELETE api/<AccountController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
         {
+            await _accountService.LogoutAsync();
+
+            return Ok();
         }
     }
 }
