@@ -1,4 +1,6 @@
 using ProjectVoting.ApplicationCore.DTOs;
+using ProjectVoting.ApplicationCore.Interfaces;
+using ProjectVoting.ApplicationCore.Services;
 
 namespace ProjectVoting.Email
 {
@@ -13,12 +15,15 @@ namespace ProjectVoting.Email
 
         public static void Main(string[] args)
         {
-            var builder = Host.CreateDefaultBuilder(args).ConfigureServices((context, services) =>
+            var builder = Host.CreateDefaultBuilder(args).ConfigureAppConfiguration((hostingContext, config) =>
             {
-                var program = new Program(context.Configuration);
-
-                services.Configure<EmailOptions>(program.configuration.GetSection("EmailOptions"));
+                config.SetBasePath(Directory.GetCurrentDirectory());
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            })
+            .ConfigureServices((context, services) =>
+            {
                 services.AddHostedService<Worker>();
+                services.AddSingleton<IEmailSender, EmailSender>();
             });
 
             var host = builder.Build();
