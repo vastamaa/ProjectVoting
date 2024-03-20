@@ -1,24 +1,24 @@
-using Microsoft.Extensions.Options;
 using ProjectVoting.ApplicationCore.DTOs;
+using ProjectVoting.ApplicationCore.Interfaces;
 
 namespace ProjectVoting.Email
 {
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly IOptions<EmailOptions> _emailOptions;
+        private readonly IEmailSender _emailSender;
 
-        public Worker(ILogger<Worker> logger, IOptions<EmailOptions> emailOptions)
+        public Worker(ILogger<Worker> logger, IEmailSender emailSender)
         {
             _logger = logger;
-            _emailOptions = emailOptions;
+            _emailSender = emailSender;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                var smtp = _emailOptions.Value.SmtpServer;
+                _emailSender.SendEmail(new EmailMessage(new List<string> { "test@test.hu" }, "", ""));
 
                 if (_logger.IsEnabled(LogLevel.Information))
                 {
@@ -27,5 +27,6 @@ namespace ProjectVoting.Email
                 await Task.Delay(1000, stoppingToken);
             }
         }
+
     }
 }
