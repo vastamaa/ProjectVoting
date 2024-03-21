@@ -1,5 +1,6 @@
 using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Interfaces;
+using SendWithBrevo;
 
 namespace ProjectVoting.Email
 {
@@ -18,7 +19,7 @@ namespace ProjectVoting.Email
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _emailSender.SendEmail(new EmailMessage(new List<string> { "test@test.hu" }, "", ""));
+                _emailSender.SendEmail(new EmailMessage(new Sender("name", "email"), new List<Recipient> { new Recipient("name", "test@test.hu") }, "", ""));
 
                 if (_logger.IsEnabled(LogLevel.Information))
                 {
