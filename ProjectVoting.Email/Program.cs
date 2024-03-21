@@ -1,4 +1,3 @@
-using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.ApplicationCore.Services;
 
