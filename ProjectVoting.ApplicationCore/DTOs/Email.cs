@@ -1,16 +1,20 @@
-﻿using System.Net.Mail;
+﻿using SendWithBrevo;
 
 namespace ProjectVoting.ApplicationCore.DTOs
 {
     public class EmailMessage
     {
-        public List<MailAddress> To { get; set; }
+        public Sender Sender { get; set; }
+        public List<Recipient> To { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }
-        public EmailMessage(IEnumerable<string> to, string subject, string content)
+        public EmailMessage(Sender sender, IEnumerable<Recipient> to, string subject, string content)
         {
-            To = new List<MailAddress>();
-            To.AddRange(to.Select(x => new MailAddress(x)));
+            Sender = sender;
+
+
+            To = new List<Recipient>();
+            To.AddRange(to.Select(x => new Recipient(x.Name, x.Email)));
             Subject = subject;
             Content = content;
         }
