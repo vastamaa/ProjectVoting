@@ -19,11 +19,11 @@ namespace ProjectVoting.ApplicationCore.Services
         public async void SendEmail(EmailMessage message)
         {
             await _client.SendAsync(
-                new Sender("name", "sender mail"),
-                new List<Recipient> { new Recipient("Test", "recipient mail") },
-                "Email subject",
-                "Email body",
-                false);
+                message.Sender,
+                message.To,
+                message.Subject,
+                message.Content,
+                isHtml: false);
         }
 
         private BrevoClient GetEmailClient()
