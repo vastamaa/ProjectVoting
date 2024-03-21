@@ -23,9 +23,11 @@ namespace ProjectVoting.ApplicationCore.Services
             await _userManager.AddToRoleAsync(_mapper.Map<User>(userModel), role);
         }
 
-        public async Task<IdentityResult> RegisterUser(UserRegistration userModel)
+        public async Task<bool> RegisterUser(UserRegistration userModel)
         {
-            return await _userManager.CreateAsync(_mapper.Map<User>(userModel), userModel.Password);
+            var result = await _userManager.CreateAsync(_mapper.Map<User>(userModel), userModel.Password);
+
+            return result.Succeeded;
         }
 
         public async Task<bool> LoginAsync(UserLogin userModel)

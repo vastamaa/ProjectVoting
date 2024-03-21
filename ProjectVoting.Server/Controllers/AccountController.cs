@@ -26,14 +26,9 @@ namespace ProjectVoting.Server.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register(UserRegistration userModel)
         {
-            var result = await _accountService.RegisterUser(userModel);
+            var isRegistered = await _accountService.RegisterUser(userModel);
 
-            if (!result.Succeeded)
-            {
-                return BadRequest(userModel);
-            }
-
-            return Ok();
+            return isRegistered ? Ok() : BadRequest(userModel);
         }
 
         [HttpPost(nameof(Login))]
