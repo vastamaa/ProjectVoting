@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ProjectVoting.ApplicationCore.DTOs;
-using ProjectVoting.Infrastructure.Persistence.Models;
 
 namespace ProjectVoting.ApplicationCore.Mappings
 {
