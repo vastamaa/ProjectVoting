@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjectVoting.ApplicationCore.DTOs
 {
@@ -33,12 +32,5 @@ namespace ProjectVoting.ApplicationCore.DTOs
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-    }
-
-    public class User : IdentityUser
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
     }
 }
