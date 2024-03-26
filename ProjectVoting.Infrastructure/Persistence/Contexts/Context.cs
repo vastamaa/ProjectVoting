@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ProjectVoting.Infrastructure.Persistence.Models;
 
 namespace ProjectVoting.Infrastructure.Persistence.Contexts
 {
-    public class Context : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public Context(DbContextOptions options) : base(options) { }
-
+        // Source: https://stackoverflow.com/questions/56686093/unable-to-create-an-object-of-type-dbcontext
+        // I mean, god damn! Couldn't they make it less obvious? What were they thinking?
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     }
 }

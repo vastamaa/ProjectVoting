@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Interfaces;
+using ProjectVoting.Infrastructure.Persistence.Models;
 
 namespace ProjectVoting.ApplicationCore.Services
 {
