@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Interfaces;
+using ProjectVoting.Infrastructure.Persistence.Models;
 using ProjectVoting.Server.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,7 +23,7 @@ namespace ProjectVoting.Server.Controllers
 
         // POST api/<AccountController>
         [HttpPost(nameof(Register))]
-        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register(UserRegistration userModel)
         {
@@ -32,7 +33,7 @@ namespace ProjectVoting.Server.Controllers
         }
 
         [HttpPost(nameof(Login))]
-        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Login(UserLogin userModel)
         {
@@ -48,6 +49,12 @@ namespace ProjectVoting.Server.Controllers
             await _accountService.LogoutAsync();
 
             return Ok();
+        }
+
+        [HttpGet(nameof(GetAllUsers))]
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _accountService.GetAllUsers();
         }
     }
 }
