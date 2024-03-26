@@ -4,6 +4,7 @@ using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.Infrastructure.Persistence.Models;
 using ProjectVoting.Server.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +13,7 @@ namespace ProjectVoting.Server.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
+    [ExcludeFromCodeCoverage]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
@@ -23,7 +25,6 @@ namespace ProjectVoting.Server.Controllers
 
         // POST api/<AccountController>
         [HttpPost(nameof(Register))]
-        [AllowAnonymous]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register(UserRegistration userModel)
         {
@@ -33,7 +34,6 @@ namespace ProjectVoting.Server.Controllers
         }
 
         [HttpPost(nameof(Login))]
-        [AllowAnonymous]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Login(UserLogin userModel)
         {

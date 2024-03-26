@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectVoting.ApplicationCore.DTOs
 {
+    [ExcludeFromCodeCoverage]
     public class UserRegistration
     {
         public string FirstName { get; set; }
@@ -20,6 +22,7 @@ namespace ProjectVoting.ApplicationCore.DTOs
         public string ConfirmPassword { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class UserLogin
     {
         [Required]

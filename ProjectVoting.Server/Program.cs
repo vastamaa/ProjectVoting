@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Extensions;
 using ProjectVoting.Server.Filters;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace ProjectVoting.Server
 {
+    [ExcludeFromCodeCoverage]
     public static class Program
     {
         public static void Main(string[] args)

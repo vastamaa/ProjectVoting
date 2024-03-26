@@ -1,7 +1,9 @@
 ﻿using SendWithBrevo;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectVoting.ApplicationCore.DTOs
 {
+    [ExcludeFromCodeCoverage]
     public class EmailMessage
     {
         public Sender Sender { get; set; }

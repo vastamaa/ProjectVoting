@@ -5,10 +5,12 @@ using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.ApplicationCore.Services;
 using ProjectVoting.Infrastructure.Persistence.Contexts;
 using ProjectVoting.Infrastructure.Persistence.Models;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace ProjectVoting.ApplicationCore.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationCore(this IServiceCollection services)

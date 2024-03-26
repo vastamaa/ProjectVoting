@@ -1,7 +1,9 @@
 using ProjectVoting.ApplicationCore.Extensions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectVoting.Email
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         private IConfiguration configuration { get; }
