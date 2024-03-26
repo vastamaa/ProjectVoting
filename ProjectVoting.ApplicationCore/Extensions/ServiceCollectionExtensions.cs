@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectVoting.Infrastructure.Persistence.Models;
 using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.ApplicationCore.Services;
 using ProjectVoting.Infrastructure.Persistence.Contexts;
+using ProjectVoting.Infrastructure.Persistence.Models;
 using System.Reflection;
-using Microsoft.Net.Http.Headers;
-using RestWrapper;
 
 namespace ProjectVoting.ApplicationCore.Extensions
 {

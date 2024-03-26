@@ -1,5 +1,4 @@
 ﻿using ProjectVoting.ApplicationCore.Interfaces;
-using System.Net.Http.Json;
 using ProjectVoting.Infrastructure.Persistence.Models;
 using System.Text.Json;
 
@@ -24,7 +23,7 @@ namespace ProjectVoting.ApplicationCore.Services
 
                 var jsonString = await result.Content.ReadAsStringAsync();
 
-                return JsonSerializer.Deserialize<IEnumerable<User>>(jsonString, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
+                return JsonSerializer.Deserialize<IEnumerable<User>>(jsonString, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             }
         }
     }
