@@ -9,3 +9,5 @@ namespace ProjectVoting.Infrastructure.Persistence.Contexts
         // Source: https://stackoverflow.com/questions/56686093/unable-to-create-an-object-of-type-dbcontext
         // I mean, god damn! Couldn't they make it less obvious? What were they thinking?
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    }
+}
