@@ -1,3 +1,4 @@
+using ProjectVoting.ApplicationCore.Extensions;
 using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.ApplicationCore.Services;
 
@@ -21,8 +22,9 @@ namespace ProjectVoting.Email
             })
             .ConfigureServices((context, services) =>
             {
+                services.AddAPIClient();
+                services.AddCustomEmailWorkerServices();
                 services.AddHostedService<Worker>();
-                services.AddSingleton<IEmailSender, EmailSender>();
             });
 
             var host = builder.Build();
