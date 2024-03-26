@@ -6,6 +6,8 @@ using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.ApplicationCore.Services;
 using ProjectVoting.Infrastructure.Persistence.Contexts;
 using System.Reflection;
+using Microsoft.Net.Http.Headers;
+using RestWrapper;
 
 namespace ProjectVoting.ApplicationCore.Extensions
 {
@@ -43,6 +45,23 @@ namespace ProjectVoting.ApplicationCore.Extensions
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<IAccountService, AccountService>();
+
+            return services;
+        }
+
+        // Source: https://www.milanjovanovic.tech/blog/the-right-way-to-use-httpclient-in-dotnet
+        public static IHttpClientBuilder AddAPIClient(this IServiceCollection services)
+        {
+            return services.AddHttpClient("API", (serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5217/");
+            });
+        }
+
+        public static IServiceCollection AddCustomEmailWorkerServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddSingleton<IHttpRequestService, HttpRequestService>();
 
             return services;
         }
