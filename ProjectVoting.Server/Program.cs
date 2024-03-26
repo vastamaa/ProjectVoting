@@ -15,7 +15,7 @@ namespace ProjectVoting.Server
 
             // Add services to the container.
             builder.Services.AddApplicationCore();
-            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value);
             builder.Services.AddCustomServices();
             builder.Services.AddUserIdentity();
             builder.Services.AddScoped<ValidationFilterAttribute>();
