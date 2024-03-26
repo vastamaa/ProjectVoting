@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectVoting.ApplicationCore.DTOs;
+using ProjectVoting.Infrastructure.Persistence.Models;
 using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.ApplicationCore.Services;
 using ProjectVoting.Infrastructure.Persistence.Contexts;
@@ -19,10 +18,9 @@ namespace ProjectVoting.ApplicationCore.Extensions
             return services;
         }
 
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
         {
-            var defaultConnectionString = configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<Context>(options => options.UseSqlServer(defaultConnectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
             return services;
         }
@@ -37,7 +35,7 @@ namespace ProjectVoting.ApplicationCore.Extensions
 
                 options.User.RequireUniqueEmail = true;
             })
-                .AddEntityFrameworkStores<Context>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             return services;
         }
