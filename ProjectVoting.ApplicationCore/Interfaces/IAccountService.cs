@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using ProjectVoting.ApplicationCore.DTOs;
+﻿using ProjectVoting.ApplicationCore.DTOs;
+using ProjectVoting.Infrastructure.Persistence.Models;
 
 namespace ProjectVoting.ApplicationCore.Interfaces
 {
@@ -9,6 +9,6 @@ namespace ProjectVoting.ApplicationCore.Interfaces
         Task AddUserToRole(UserRegistration userModel, string role);
         Task<bool> LoginAsync(UserLogin userModel);
         Task LogoutAsync();
-
+        Task<IEnumerable<User>> GetAllUsers();
     }
 }

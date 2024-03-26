@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ProjectVoting.ApplicationCore.DTOs;
 using ProjectVoting.ApplicationCore.Interfaces;
 using ProjectVoting.Infrastructure.Persistence.Models;
@@ -41,6 +42,11 @@ namespace ProjectVoting.ApplicationCore.Services
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _userManager.Users.ToListAsync();
         }
     }
 }
