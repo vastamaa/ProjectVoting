@@ -16,7 +16,7 @@ namespace ProjectVoting.ApplicationCore.Services
             _client = GetEmailClient();
         }
 
-        public async void SendEmail(EmailMessage message)
+        public async Task SendEmail(EmailMessage message)
         {
             await _client.SendAsync(
                 message.Sender,
@@ -28,7 +28,6 @@ namespace ProjectVoting.ApplicationCore.Services
 
         private BrevoClient GetEmailClient()
         {
-            var apiKey = _configuration.GetSection("EmailOptions:ApiKey");
             return new BrevoClient(_configuration.GetSection("EmailOptions:ApiKey").Value);
         }
     }

@@ -4,6 +4,6 @@ namespace ProjectVoting.ApplicationCore.Interfaces
 {
     public interface IEmailSender
     {
-        void SendEmail(EmailMessage message);
+        Task SendEmail(EmailMessage message);
     }
 }
