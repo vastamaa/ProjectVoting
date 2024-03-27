@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ProjectVoting.Server.Filters
 {
@@ -12,6 +13,8 @@ namespace ProjectVoting.Server.Filters
                 context.Result = new UnprocessableEntityObjectResult(context.ModelState);
             }
         }
+
+        [ExcludeFromCodeCoverage]
         public void OnActionExecuted(ActionExecutedContext context) { }
     }
 }
