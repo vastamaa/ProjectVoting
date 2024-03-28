@@ -17,7 +17,7 @@ namespace ProjectVoting.Server.Tests.Filters
     public class ValidationFilterAttributeTests
     {
         [Fact]
-        public void ValidationFilterAttribute_Should()
+        public void ValidationFilterAttribute_ShouldReturnUnprocessableEntityObjectResult()
         {
             // Arrange
 
